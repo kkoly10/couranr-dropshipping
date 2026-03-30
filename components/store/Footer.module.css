@@ -1,0 +1,90 @@
+.footer {
+  background-color: var(--color-espresso);
+  color: var(--color-sand);
+  padding: var(--space-8) 0 var(--space-6);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.5fr;
+  gap: var(--space-7);
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-ivory);
+  letter-spacing: 0.04em;
+}
+
+.tagline {
+  font-size: var(--text-sm);
+  color: var(--color-taupe);
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.heading {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-ivory);
+}
+
+.linkList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.linkList a {
+  font-size: var(--text-sm);
+  color: var(--color-taupe);
+  transition: color var(--transition);
+}
+
+.linkList a:hover {
+  color: var(--color-ivory);
+}
+
+.newsletterText {
+  font-size: var(--text-sm);
+  color: var(--color-taupe);
+  line-height: 1.5;
+}
+
+.bottom {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-6) var(--container-pad) 0;
+  border-top: 1px solid rgba(154, 143, 131, 0.2);
+  margin-top: var(--space-7);
+  font-size: var(--text-xs);
+  color: var(--color-taupe);
+}
+
+@media (max-width: 768px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}
