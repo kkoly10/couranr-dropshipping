@@ -1,0 +1,18 @@
+.select {
+  padding: var(--space-2) var(--space-4);
+  padding-right: var(--space-6);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-espresso);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  outline: none;
+  appearance: auto;
+  transition: border-color var(--transition);
+}
+
+.select:focus {
+  border-color: var(--color-clay);
+}

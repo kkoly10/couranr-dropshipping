@@ -1,0 +1,132 @@
+.page {
+  padding: var(--space-7) 0 var(--space-9);
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+.back {
+  display: inline-block;
+  font-size: var(--text-sm);
+  color: var(--color-taupe);
+  margin-bottom: var(--space-5);
+  transition: color var(--transition);
+}
+
+.back:hover {
+  color: var(--color-clay);
+}
+
+.header {
+  margin-bottom: var(--space-6);
+}
+
+.date {
+  display: block;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-taupe);
+  margin-bottom: var(--space-3);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--color-espresso);
+  line-height: 1.2;
+}
+
+.excerpt {
+  margin-top: var(--space-4);
+  font-size: var(--text-lg);
+  color: var(--color-taupe);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.coverWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--space-7);
+  background-color: var(--color-sand);
+}
+
+.coverImage {
+  object-fit: cover;
+}
+
+.content {
+  font-size: var(--text-base);
+  color: var(--color-espresso);
+  line-height: 1.8;
+}
+
+.content h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  margin-top: var(--space-7);
+  margin-bottom: var(--space-3);
+}
+
+.content h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-2);
+}
+
+.content p {
+  margin-bottom: var(--space-4);
+}
+
+.content ul,
+.content ol {
+  margin-bottom: var(--space-4);
+  padding-left: var(--space-5);
+}
+
+.content li {
+  margin-bottom: var(--space-2);
+}
+
+.content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  margin: var(--space-5) 0;
+}
+
+.content blockquote {
+  border-left: 3px solid var(--color-clay);
+  padding-left: var(--space-4);
+  margin: var(--space-5) 0;
+  color: var(--color-taupe);
+  font-style: italic;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-sand);
+}
+
+.tag {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--color-taupe);
+  background-color: var(--color-sand);
+  border-radius: var(--radius-sm);
+}
