@@ -55,9 +55,12 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
 
         {/* Badges */}
         <div className={styles.badges}>
-          {isNew(product) && <Badge variant="new">New</Badge>}
+          {hasDiscount ? (
+            <Badge variant="sale">Sale</Badge>
+          ) : (
+            isNew(product) && <Badge variant="new">New</Badge>
+          )}
           {isBestSeller && <Badge variant="bestseller">Best Seller</Badge>}
-          {hasDiscount && <Badge variant="sale">Sale</Badge>}
         </div>
 
         {/* Add to cart overlay */}
