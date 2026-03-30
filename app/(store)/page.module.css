@@ -1,10 +1,10 @@
 /* Hero */
 .hero {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   min-height: 70vh;
-  padding: var(--space-9) var(--container-pad);
+  padding: 15vh var(--container-pad) var(--space-7);
   text-align: center;
 }
 
