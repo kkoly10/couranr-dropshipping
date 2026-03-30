@@ -1,0 +1,28 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.pill {
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--color-espresso);
+  background-color: transparent;
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.pill:hover {
+  border-color: var(--color-espresso);
+}
+
+.active {
+  background-color: var(--color-espresso);
+  border-color: var(--color-espresso);
+  color: var(--color-white);
+}

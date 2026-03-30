@@ -1,0 +1,59 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: var(--color-white);
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+
+.card:hover {
+  border-color: var(--color-taupe);
+  box-shadow: 0 2px 12px rgba(28, 18, 8, 0.06);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: var(--color-sand);
+}
+
+.image {
+  object-fit: cover;
+  transition: transform var(--transition);
+}
+
+.card:hover .image {
+  transform: scale(1.03);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+}
+
+.date {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-taupe);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 400;
+  color: var(--color-espresso);
+  line-height: 1.3;
+}
+
+.excerpt {
+  font-size: var(--text-sm);
+  color: var(--color-taupe);
+  line-height: 1.6;
+}
