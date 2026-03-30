@@ -12,11 +12,10 @@ export type ProductCardProps = {
 };
 
 function isNew(product: Product): boolean {
+  const createdAt = (product as Product & { created_at?: string }).created_at;
+  if (!createdAt) return false;
   const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
-  // If product has no created_at we can't tell, default false
-  return false || (product as Product & { created_at?: string }).created_at
-    ? new Date((product as Product & { created_at?: string }).created_at!).getTime() > thirtyDaysAgo
-    : false;
+  return new Date(createdAt).getTime() > thirtyDaysAgo;
 }
 
 function formatPrice(price: number): string {
