@@ -36,10 +36,10 @@
 
 .links a {
   font-family: var(--font-body);
-  font-size: var(--text-sm);
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.14em;
   color: var(--color-espresso);
   transition: color var(--transition);
 }
