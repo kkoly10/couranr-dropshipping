@@ -2,21 +2,23 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useCart, getCartItemCount } from "@/lib/cart";
 import styles from "./Navbar.module.css";
 
-export type NavbarProps = {
-  cartItemCount?: number;
-};
-
-export default function Navbar({ cartItemCount = 0 }: NavbarProps) {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { items, toggleDrawer } = useCart();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const cartItemCount = mounted ? getCartItemCount(items) : 0;
 
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
@@ -64,7 +66,11 @@ export default function Navbar({ cartItemCount = 0 }: NavbarProps) {
           </Link>
 
           {/* Cart */}
-          <Link href="/cart" className={styles.iconBtn} aria-label="Cart">
+          <button
+            className={styles.iconBtn}
+            onClick={toggleDrawer}
+            aria-label="Cart"
+          >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
               <line x1="3" y1="6" x2="21" y2="6" />
@@ -73,7 +79,7 @@ export default function Navbar({ cartItemCount = 0 }: NavbarProps) {
             {cartItemCount > 0 && (
               <span className={styles.cartCount}>{cartItemCount}</span>
             )}
-          </Link>
+          </button>
         </div>
       </nav>
 
