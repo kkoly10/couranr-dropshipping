@@ -10,6 +10,7 @@ import SupplierBadge from "@/components/store/SupplierBadge";
 import type { Product } from "@/types";
 import styles from "./page.module.css";
 import AddToCartSection from "./AddToCartSection";
+import WishlistButton from "@/components/ai/WishlistButton";
 
 type ProductPageProps = {
   params: { slug: string };
@@ -85,7 +86,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <Badge variant="category">{p.category.name}</Badge>
             )}
 
-            <h1 className={styles.name}>{p.name}</h1>
+            <div className={styles.nameRow}>
+              <h1 className={styles.name}>{p.name}</h1>
+              <WishlistButton productId={p.id} currentPrice={p.price} />
+            </div>
 
             <div className={styles.pricing}>
               <span className={styles.price}>{formatPrice(p.price)}</span>

@@ -26,6 +26,13 @@
   gap: var(--space-4);
 }
 
+.nameRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
 .name {
   font-family: var(--font-display);
   font-size: var(--text-3xl);
