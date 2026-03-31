@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { createServerClient } from "@/lib/supabase/server";
+import { getActiveDiscount, applyDiscount } from "@/lib/marketing/get-discount";
 import ProductImageGallery from "@/components/store/ProductImageGallery";
 import ProductGrid from "@/components/store/ProductGrid";
 import Badge from "@/components/ui/Badge";
@@ -69,6 +70,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
     .eq("in_stock", true)
     .limit(4);
 
+  const promoDiscount = await getActiveDiscount(p.id, p.category_id ?? undefined);
+  const promoPrice = promoDiscount > 0 ? applyDiscount(p.price, promoDiscount) : null;
+
   const hasDiscount = p.compare_price && p.compare_price > p.price;
 
   return (
@@ -92,13 +96,29 @@ export default async function ProductPage({ params }: ProductPageProps) {
             </div>
 
             <div className={styles.pricing}>
-              <span className={styles.price}>{formatPrice(p.price)}</span>
-              {hasDiscount && (
-                <span className={styles.comparePrice}>
-                  {formatPrice(p.compare_price!)}
-                </span>
+              {promoPrice !== null ? (
+                <>
+                  <span className={styles.price}>{formatPrice(promoPrice)}</span>
+                  <span className={styles.comparePrice}>
+                    {formatPrice(p.price)}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className={styles.price}>{formatPrice(p.price)}</span>
+                  {hasDiscount && (
+                    <span className={styles.comparePrice}>
+                      {formatPrice(p.compare_price!)}
+                    </span>
+                  )}
+                </>
               )}
             </div>
+            {promoDiscount > 0 && (
+              <div className={styles.promoBadge}>
+                {promoDiscount}% off — limited time
+              </div>
+            )}
 
             {p.description && (
               <div className={styles.description}>

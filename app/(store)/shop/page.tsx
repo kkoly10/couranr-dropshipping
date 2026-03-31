@@ -1,8 +1,10 @@
 export const dynamic = "force-dynamic";
 
 import { Suspense } from "react";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { createServerClient } from "@/lib/supabase/server";
+import { getActiveSitewidePromotion } from "@/lib/marketing/get-discount";
 import ProductGrid from "@/components/store/ProductGrid";
 import CategoryFilter from "@/components/store/CategoryFilter";
 import SortSelect from "@/components/store/SortSelect";
@@ -58,8 +60,16 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
   const { data: products } = await query;
 
+  const sitewidePromo = await getActiveSitewidePromotion();
+
   return (
     <div className={styles.page}>
+      {sitewidePromo && (
+        <div className={styles.promoBanner}>
+          <p>{sitewidePromo.discount_pct}% off everything — limited time</p>
+          <Link href="/shop" className={styles.promoCta}>Shop Now</Link>
+        </div>
+      )}
       <div className={styles.container}>
         <div className={styles.header}>
           <h1 className={styles.title}>Shop All</h1>
