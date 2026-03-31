@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 
 import Link from "next/link";
 import { stripe } from "@/lib/stripe";
+import SetupCompleter from "./SetupCompleter";
 import styles from "./page.module.css";
 
 type OrderConfirmationProps = {
@@ -139,6 +140,13 @@ export default async function OrderConfirmationPage({
             </div>
           )}
         </div>
+
+        <SetupCompleter
+          items={lineItems.map((item) => ({
+            product_name: item.description ?? "",
+            unit_price: (item.amount_total ?? 0) / 100,
+          }))}
+        />
 
         <Link href="/shop" className={styles.cta}>
           Continue Shopping
