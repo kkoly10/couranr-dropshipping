@@ -1,0 +1,23 @@
+.grid {
+  column-count: 3;
+  column-gap: var(--space-4);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    column-count: 1;
+  }
+}
+
+.empty {
+  text-align: center;
+  padding: var(--space-9) var(--space-4);
+  color: var(--color-taupe);
+  font-size: var(--text-lg);
+}
