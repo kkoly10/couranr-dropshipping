@@ -6,9 +6,11 @@ import { createServerClient } from "@/lib/supabase/server";
 import ProductImageGallery from "@/components/store/ProductImageGallery";
 import ProductGrid from "@/components/store/ProductGrid";
 import Badge from "@/components/ui/Badge";
+import SupplierBadge from "@/components/store/SupplierBadge";
 import type { Product } from "@/types";
 import styles from "./page.module.css";
 import AddToCartSection from "./AddToCartSection";
+import WishlistButton from "@/components/ai/WishlistButton";
 
 type ProductPageProps = {
   params: { slug: string };
@@ -84,7 +86,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <Badge variant="category">{p.category.name}</Badge>
             )}
 
-            <h1 className={styles.name}>{p.name}</h1>
+            <div className={styles.nameRow}>
+              <h1 className={styles.name}>{p.name}</h1>
+              <WishlistButton productId={p.id} currentPrice={p.price} />
+            </div>
 
             <div className={styles.pricing}>
               <span className={styles.price}>{formatPrice(p.price)}</span>
@@ -103,15 +108,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
             <AddToCartSection product={p} />
 
-            <div className={styles.shipping}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="1" y="3" width="15" height="13" />
-                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
-                <circle cx="5.5" cy="18.5" r="2.5" />
-                <circle cx="18.5" cy="18.5" r="2.5" />
-              </svg>
-              <span>Ships in 2–8 business days from the U.S.</span>
-            </div>
+            <SupplierBadge
+              supplier={p.supplier}
+              shippingDaysMin={p.shipping_days_min}
+              shippingDaysMax={p.shipping_days_max}
+            />
           </div>
         </div>
 

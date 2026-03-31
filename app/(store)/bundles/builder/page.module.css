@@ -1,0 +1,43 @@
+.page {
+  padding: var(--space-7) 0 var(--space-9);
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+.hero {
+  margin-bottom: var(--space-7);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--color-espresso);
+}
+
+.subtitle {
+  margin-top: var(--space-3);
+  font-size: var(--text-lg);
+  color: var(--color-taupe);
+  line-height: 1.6;
+  max-width: 560px;
+}
+
+.stylistLink {
+  display: inline-block;
+  margin-top: var(--space-7);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--color-clay);
+  text-decoration: none;
+  transition: opacity var(--transition);
+}
+
+.stylistLink:hover {
+  opacity: 0.8;
+}
