@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart, getCartSubtotal, getCartItemCount } from "@/lib/cart";
+import { trackInitiateCheckout } from "@/lib/analytics";
 import {
   calculateShipping,
   getShippingMessage,
@@ -31,6 +32,11 @@ export default function CartPage() {
 
   async function handleCheckout() {
     setLoading(true);
+    trackInitiateCheckout({
+      value: subtotal,
+      currency: "USD",
+      num_items: getCartItemCount(items),
+    });
     try {
       const res = await fetch("/api/stripe/checkout", {
         method: "POST",

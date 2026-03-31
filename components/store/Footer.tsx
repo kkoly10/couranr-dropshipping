@@ -26,6 +26,16 @@ export default function Footer() {
           </ul>
         </div>
 
+        {/* Legal */}
+        <div className={styles.column}>
+          <h3 className={styles.heading}>Legal</h3>
+          <ul className={styles.linkList}>
+            <li><Link href="/returns">Returns &amp; Refunds</Link></li>
+            <li><Link href="/privacy">Privacy Policy</Link></li>
+            <li><Link href="/terms">Terms of Service</Link></li>
+          </ul>
+        </div>
+
         {/* Newsletter */}
         <div className={styles.column}>
           <h3 className={styles.heading}>Stay in the Loop</h3>

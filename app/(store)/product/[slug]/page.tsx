@@ -11,6 +11,7 @@ import SupplierBadge from "@/components/store/SupplierBadge";
 import type { Product } from "@/types";
 import styles from "./page.module.css";
 import AddToCartSection from "./AddToCartSection";
+import ViewContentTracker from "./ViewContentTracker";
 import WishlistButton from "@/components/ai/WishlistButton";
 
 type ProductPageProps = {
@@ -77,6 +78,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <div className={styles.page}>
+      <ViewContentTracker name={p.name} id={p.id} price={p.price} />
       <div className={styles.container}>
         <div className={styles.product}>
           {/* Image Gallery */}
