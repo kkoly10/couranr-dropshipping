@@ -181,7 +181,7 @@ export default function SpaceAnalyzer() {
 
           <div className={styles.footer}>
             <p className={styles.totalPrice}>
-              Estimated Total: ${result.total_price.toFixed(2)}
+              Estimated Total: ${result.total.toFixed(2)}
             </p>
             {result.transformation_note && (
               <p className={styles.transformationNote}>

@@ -153,6 +153,30 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* AI Stylist CTA */}
+      <section className={styles.stylistSection}>
+        <div className={styles.container}>
+          <div className={styles.stylistInner}>
+            <span className={styles.stylistLabel}>AI-Powered</span>
+            <h2 className={styles.sectionTitle}>
+              Not sure where to start?
+            </h2>
+            <p className={styles.stylistText}>
+              Take our 60-second style quiz and get personalized product
+              recommendations tailored to your space, style, and budget.
+            </p>
+            <div className={styles.stylistCtas}>
+              <Link href="/stylist" className={styles.ctaPrimary}>
+                Get My Setup
+              </Link>
+              <Link href="/my-space" className={styles.ctaSecondary}>
+                Describe Your Space
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Blog Preview */}
       {blogPosts && blogPosts.length > 0 && (
         <section className={styles.section}>
@@ -171,6 +195,24 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      {/* Showcase Preview */}
+      <section className={styles.section}>
+        <div className={styles.container}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Setup Showcase</h2>
+            <Link href="/showcase" className={styles.viewAll}>
+              View All
+            </Link>
+          </div>
+          <p className={styles.showcaseText}>
+            See how others style their spaces with Couranr products.
+          </p>
+          <Link href="/showcase/submit" className={styles.showcaseSubmit}>
+            Share your setup &rarr;
+          </Link>
+        </div>
+      </section>
 
       {/* Newsletter */}
       <section className={styles.newsletterSection}>

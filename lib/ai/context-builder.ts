@@ -40,7 +40,7 @@ Total available products: ${products.length}
 
 ${products
   .map((p) => {
-    const category = p.category as { name: string; slug: string } | null;
+    const category = p.category as unknown as { name: string; slug: string } | null;
     const savings = p.compare_price ? `(was $${p.compare_price})` : "";
     return `
 PRODUCT: ${p.name}

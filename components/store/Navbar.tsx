@@ -43,12 +43,21 @@ export default function Navbar() {
         <ul className={styles.links}>
           <li><Link href="/shop">Shop</Link></li>
           <li><Link href="/bundles">Bundles</Link></li>
+          <li><Link href="/stylist">Get My Setup</Link></li>
+          <li><Link href="/showcase">Showcase</Link></li>
           <li><Link href="/blog">Blog</Link></li>
           <li><Link href="/about">About</Link></li>
         </ul>
 
         {/* Icons */}
         <div className={styles.icons}>
+          {/* Wishlist */}
+          <Link href="/account/wishlist" className={styles.iconBtn} aria-label="Wishlist">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+          </Link>
+
           {/* Search */}
           <button className={styles.iconBtn} aria-label="Search">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -88,6 +97,8 @@ export default function Navbar() {
         <ul className={styles.mobileMenu}>
           <li><Link href="/shop" onClick={() => setMenuOpen(false)}>Shop</Link></li>
           <li><Link href="/bundles" onClick={() => setMenuOpen(false)}>Bundles</Link></li>
+          <li><Link href="/stylist" onClick={() => setMenuOpen(false)}>Get My Setup</Link></li>
+          <li><Link href="/showcase" onClick={() => setMenuOpen(false)}>Showcase</Link></li>
           <li><Link href="/blog" onClick={() => setMenuOpen(false)}>Blog</Link></li>
           <li><Link href="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
         </ul>
