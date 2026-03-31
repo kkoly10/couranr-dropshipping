@@ -16,43 +16,36 @@ async function fetchProducts() {
     return [];
   }
 
-  // Direct REST API call — works reliably in all server contexts
-  // (API routes, server components, cron jobs)
-  const params = new URLSearchParams({
-    select:
-      "name,slug,description,price,compare_price,supplier,shipping_days_min,shipping_days_max,in_stock,below_margin,tags,category:categories(name,slug),images:product_images(url,is_primary)",
-    order: "is_featured.desc",
-    or: "(in_stock.eq.true,in_stock.is.null)",
-  });
-
-  const res = await fetch(`${supabaseUrl}/rest/v1/products?${params}`, {
-    headers: {
-      apikey: serviceKey,
-      Authorization: `Bearer ${serviceKey}`,
-      "Content-Type": "application/json",
-    },
-    cache: "no-store",
-  });
+  // Only select columns confirmed to exist in the products table
+  const res = await fetch(
+    `${supabaseUrl}/rest/v1/products?select=name,slug,description,price,compare_price,supplier,shipping_days_min,shipping_days_max,in_stock,tags&in_stock=eq.true`,
+    {
+      headers: {
+        apikey: serviceKey,
+        Authorization: `Bearer ${serviceKey}`,
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    }
+  );
 
   if (!res.ok) {
-    console.error("context-builder: Supabase fetch failed", res.status, await res.text());
+    console.error(
+      "context-builder: Supabase fetch failed",
+      res.status,
+      await res.text()
+    );
     return [];
   }
 
   const products = await res.json();
 
-  // Filter out below_margin products in JS (handles null gracefully)
-  const filtered = products.filter(
-    (p: Record<string, unknown>) => p.below_margin !== true
-  );
-
   console.log("context-builder DB response:", {
     total: products?.length,
-    filtered: filtered?.length,
-    first: filtered?.[0]?.name,
+    first: products?.[0]?.name,
   });
 
-  return filtered;
+  return products;
 }
 
 export async function buildProductContext(): Promise<string> {
@@ -72,14 +65,12 @@ Total available products: ${products.length}
 
 ${products
   .map((p: Record<string, unknown>) => {
-    const category = p.category as { name: string; slug: string } | null;
     const savings = p.compare_price ? `(was $${p.compare_price})` : "";
     return `
 PRODUCT: ${p.name}
 - Slug: ${p.slug}
 - Price: $${p.price} ${savings}
-- Category: ${category?.name ?? "Uncategorized"}
-- Supplier: ${p.supplier} (US warehouse)
+- Supplier: ${p.supplier ?? "US Supplier"} (US warehouse)
 - Ships: ${(p.shipping_days_min as number) ?? 2}–${(p.shipping_days_max as number) ?? 8} business days
 - Tags: ${(p.tags as string[])?.join(", ") ?? ""}
 - Description: ${((p.description as string) ?? "").slice(0, 150)}...
