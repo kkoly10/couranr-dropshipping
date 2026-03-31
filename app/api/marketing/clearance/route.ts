@@ -15,10 +15,10 @@ export async function GET(request: Request) {
     let discounted = 0;
 
     for (const product of products) {
-      if (product.margin > 45) {
+      if (product.margin_pct > 45) {
         await applyProductDiscount(product.id, 15);
         discounted++;
-      } else if (product.margin > 35) {
+      } else if (product.margin_pct > 35) {
         await applyProductDiscount(product.id, 8);
         discounted++;
       }
