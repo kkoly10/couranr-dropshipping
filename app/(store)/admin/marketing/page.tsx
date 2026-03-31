@@ -456,8 +456,8 @@ export default function AdminMarketingPage() {
               </thead>
               <tbody>
                 {data.recentCampaigns.map((c) => (
-                  <>
-                    <tr key={c.id}>
+                  <Fragment key={c.id}>
+                    <tr>
                       <td>{fmtDate(c.sent_at)}</td>
                       <td>{c.subject}</td>
                       <td>{c.recipients_count}</td>
@@ -477,13 +477,13 @@ export default function AdminMarketingPage() {
                       </td>
                     </tr>
                     {expandedCampaign === c.id && (
-                      <tr key={`${c.id}-preview`}>
+                      <tr>
                         <td colSpan={6}>
                           <div className={styles.previewBody}>{c.body}</div>
                         </td>
                       </tr>
                     )}
-                  </>
+                  </Fragment>
                 ))}
               </tbody>
             </table>
