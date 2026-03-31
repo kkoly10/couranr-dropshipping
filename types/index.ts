@@ -170,3 +170,73 @@ export type SetupShowcase = {
   is_seeded: boolean;
   created_at: string;
 };
+
+// Marketing Engine Types
+export type Promotion = {
+  id: string;
+  type: "sitewide" | "category" | "product" | "clearance";
+  discount_pct: number;
+  scope_id: string | null;
+  scope_type: string | null;
+  reason: string | null;
+  triggered_by: "ai_engine" | "manual";
+  active: boolean;
+  expires_at: string | null;
+  deactivated_at: string | null;
+  created_at: string;
+};
+
+export type AICampaign = {
+  id: string;
+  subject: string;
+  preview_text: string | null;
+  headline: string | null;
+  body: string;
+  cta_text: string | null;
+  cta_url: string | null;
+  featured_products: string[];
+  trigger_reason: string | null;
+  recipients_count: number;
+  open_rate: number | null;
+  click_rate: number | null;
+  revenue_attributed: number;
+  resend_broadcast_id: string | null;
+  sent_at: string;
+};
+
+export type SalesSnapshot = {
+  id: string;
+  week_start: string;
+  total_orders: number;
+  total_revenue: number;
+  avg_order_value: number;
+  top_product_id: string | null;
+  worst_product_id: string | null;
+  new_subscribers: number;
+  category_breakdown: {
+    desk?: { orders: number; revenue: number };
+    home?: { orders: number; revenue: number };
+  } | null;
+  active_promotion: string | null;
+  notes: string | null;
+  created_at: string;
+};
+
+export type MarketingRuleLog = {
+  id: string;
+  rule_name: string;
+  triggered: boolean;
+  reason: string | null;
+  action_taken: string | null;
+  snapshot_id: string | null;
+  created_at: string;
+};
+
+export type EmailCampaign = {
+  subject: string;
+  preview_text: string;
+  headline: string;
+  body: string;
+  cta_text: string;
+  cta_url: string;
+};

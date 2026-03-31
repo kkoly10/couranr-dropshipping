@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import { createServerClient } from "@/lib/supabase/server";
+import { getActiveSitewidePromotion } from "@/lib/marketing/get-discount";
 import TrustBar from "@/components/store/TrustBar";
 import ProductGrid from "@/components/store/ProductGrid";
 import BlogCard from "@/components/blog/BlogCard";
@@ -12,6 +13,8 @@ import styles from "./page.module.css";
 
 export default async function HomePage() {
   const supabase = createServerClient();
+
+  const sitewidePromo = await getActiveSitewidePromotion();
 
   const [
     { data: featuredProducts },
@@ -67,6 +70,20 @@ export default async function HomePage() {
       </section>
 
       <TrustBar />
+
+      {/* Promo Banner */}
+      {sitewidePromo && (
+        <section className={styles.promoBanner}>
+          <div className={styles.container}>
+            <p className={styles.promoText}>
+              This week only: {sitewidePromo.discount_pct}% off everything
+            </p>
+            <Link href="/shop" className={styles.ctaPrimary}>
+              Shop the Sale
+            </Link>
+          </div>
+        </section>
+      )}
 
       {/* Featured Categories */}
       {categories && categories.length > 0 && (

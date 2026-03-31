@@ -71,6 +71,37 @@
   color: var(--color-white);
 }
 
+/* Promo Banner */
+.promoBanner {
+  padding: var(--space-5) 0;
+  background-color: var(--color-clay);
+  text-align: center;
+}
+
+.promoBanner .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.promoText {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.promoBanner .ctaPrimary {
+  background-color: var(--color-white);
+  color: var(--color-clay);
+}
+
+.promoBanner .ctaPrimary:hover {
+  opacity: 0.9;
+  background-color: var(--color-white);
+}
+
 /* Sections */
 .section {
   padding: var(--space-9) 0;
