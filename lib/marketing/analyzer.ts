@@ -122,7 +122,7 @@ export async function buildWeeklySnapshot(): Promise<SalesSnapshot> {
         .in("order_id", orderIds);
 
       if (allItems && allItems.length > 0) {
-        const uniqueNames = [...new Set(allItems.map((i) => i.product_name))];
+        const uniqueNames = Array.from(new Set(allItems.map((i) => i.product_name)));
         const { data: products } = await supabase
           .from("products")
           .select("name, category_id")
@@ -134,11 +134,11 @@ export async function buildWeeklySnapshot(): Promise<SalesSnapshot> {
         }
 
         // Get category names
-        const categoryIds = [
-          ...new Set(
+        const categoryIds = Array.from(
+          new Set(
             Object.values(productCategoryMap).filter(Boolean) as string[]
-          ),
-        ];
+          )
+        );
         const categoryNameMap: Record<string, string> = {};
 
         if (categoryIds.length > 0) {
