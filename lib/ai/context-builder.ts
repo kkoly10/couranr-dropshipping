@@ -16,33 +16,35 @@ async function fetchProducts() {
     return [];
   }
 
-  // Only select columns confirmed to exist in the products table
-  const res = await fetch(
-    `${supabaseUrl}/rest/v1/products?select=name,slug,description,price,compare_price,supplier,shipping_days_min,shipping_days_max,in_stock,tags&in_stock=eq.true`,
-    {
-      headers: {
-        apikey: serviceKey,
-        Authorization: `Bearer ${serviceKey}`,
-        "Content-Type": "application/json",
-      },
-      cache: "no-store",
-    }
-  );
+  // Use select=* to avoid column-not-found errors — we don't know
+  // the exact schema, so fetch everything and pick fields in JS
+  const res = await fetch(`${supabaseUrl}/rest/v1/products?select=*`, {
+    headers: {
+      apikey: serviceKey,
+      Authorization: `Bearer ${serviceKey}`,
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  });
 
   if (!res.ok) {
-    console.error(
-      "context-builder: Supabase fetch failed",
-      res.status,
-      await res.text()
-    );
+    const body = await res.text();
+    console.error("context-builder: Supabase fetch failed", res.status, body);
     return [];
   }
 
-  const products = await res.json();
+  const allProducts = await res.json();
+
+  // Filter to in-stock products in JS (handles missing/null columns)
+  const products = allProducts.filter(
+    (p: Record<string, unknown>) => p.in_stock !== false
+  );
 
   console.log("context-builder DB response:", {
-    total: products?.length,
+    total: allProducts?.length,
+    inStock: products?.length,
     first: products?.[0]?.name,
+    columns: products?.[0] ? Object.keys(products[0]) : [],
   });
 
   return products;
@@ -70,10 +72,7 @@ ${products
 PRODUCT: ${p.name}
 - Slug: ${p.slug}
 - Price: $${p.price} ${savings}
-- Supplier: ${p.supplier ?? "US Supplier"} (US warehouse)
-- Ships: ${(p.shipping_days_min as number) ?? 2}–${(p.shipping_days_max as number) ?? 8} business days
-- Tags: ${(p.tags as string[])?.join(", ") ?? ""}
-- Description: ${((p.description as string) ?? "").slice(0, 150)}...
+- Description: ${((p.description as string) ?? "").slice(0, 200)}
 `;
   })
   .join("")}
