@@ -3,6 +3,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { Product } from "@/types";
+import { trackAddToCart } from "@/lib/analytics";
 
 export type LocalCartItem = {
   product: Product;
@@ -29,6 +30,13 @@ export const useCart = create<CartState>()(
 
       addItem: (product, quantity = 1) =>
         set((state) => {
+          trackAddToCart({
+            content_name: product.name,
+            content_ids: [product.id],
+            value: product.price * quantity,
+            currency: "USD",
+          });
+
           const existing = state.items.find(
             (item) => item.product.id === product.id
           );
